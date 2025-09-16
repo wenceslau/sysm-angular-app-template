@@ -1,0 +1,33 @@
+UPDATE ANGULAR CLI VERSION
+  npm uninstall -g @angular/cli
+  npm install -g @angular/cli@19.2.15
+
+# DEPENDENCIES
+
+## Production dependencies (required for the app to run)
+ npm install primeng@19.1.4 @primeuix/themes      ## Primeng 19.1.4 for components
+ npm install primeicons                           ## Prime Icons
+ npm install date-fns                             ## Library for date and time
+ npm install jwt-decode                           ## Library for JWT decoding
+ npm install @ngx-translate/core                  ## Library for internationalization (i18n)
+ npm install @ngx-translate/http-loader           ## Library for translation http loader (i18n)
+
+>>>>>> npm install primeng@19.1.4 @primeuix/themes primeicons date-fns jwt-decode @ngx-translate/core @ngx-translate/http-loader
+
+## Development dependencies. Use --save-dev (or -D) for packages not needed in the final production bundle.
+ npm install --save-dev tailwindcss
+ npm install --save-dev @tailwindcss/postcss
+ npm install --save-dev postcss
+ npm install --save-dev tailwindcss-primeui
+
+>>>>> npm install --save-dev tailwindcss @tailwindcss/postcss postcss tailwindcss-primeui
+
+#CONFIGURATION
+ -> Tailwindcss CSS
+    - Create tailwind.css on /src/ folder
+    - Import tailwind.css on styles.css
+    - Create .postcssrc.js on root folder
+
+ -> Application
+    - Import BrowserAnimationsModule on AppModule
+    - Create CustomColors constant on AppModule with theme colors using Primeng theme as base
