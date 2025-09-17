@@ -126,7 +126,7 @@ export class HttpAppService {
 
     // Use the pipe operator for side effects (logging) and error handling
     return request$.pipe(
-      tap(response => {
+      tap(() => {
         console.log(`HTTP Success: ${verb} ${request.customPath}`);
       }),
       catchError(error => {
