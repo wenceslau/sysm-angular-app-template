@@ -16,6 +16,9 @@ import { LayoutComponent } from './application/layout/layout.component';
 import { NotFoundComponent } from './application/pages/not-found/not-found.component';
 import { AccessDeniedComponent } from './application/pages/access-denied/access-denied.component';
 import { CallbackComponent } from './security/callback/callback.component';
+import {LocaleProvider} from './services/locale-app.service';
+import { LoginComponent } from './security/login/login.component';
+import { HomeComponent } from './modules/home/home.component';
 const CustomColors = definePreset(Aura, {
   semantic: {
     primary: {
@@ -40,13 +43,16 @@ const CustomColors = definePreset(Aura, {
     LayoutComponent,
     NotFoundComponent,
     AccessDeniedComponent,
-    CallbackComponent
+    CallbackComponent,
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
   providers: [
+    LocaleProvider,
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([authInterceptor]), withFetch()),
     providePrimeNG({

@@ -1,6 +1,8 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import {catchError, firstValueFrom, Observable, tap, throwError} from 'rxjs';
+import {environment} from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +10,7 @@ import {catchError, firstValueFrom, Observable, tap, throwError} from 'rxjs';
 export class HttpAppService {
 
   private http = inject(HttpClient);
-
-  // Consider moving this to your environment files
-  private readonly apiUrl = "http://localhost:8081/dev-sync/api";
+  private readonly apiUrl = environment.apiUrl;
 
   get<T>(requestData: Request): Observable<T> {
     return this.executeHttpRequest<T>(requestData, "GET");
