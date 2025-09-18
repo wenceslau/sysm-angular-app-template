@@ -1,0 +1,10 @@
+@import "tailwindcss/base.css" layer(tailwindcss);
+@import "tailwindcss/components.css" layer(tailwindcss);
+@import "tailwindcss/utilities.css" layer(tailwindcss);
+
+@import "primeicons/primeicons.css";
+
+body {
+  font-family: Ubuntu, Roboto, "Helvetica Neue", sans-serif;
+  font-size: 1rem;
+}

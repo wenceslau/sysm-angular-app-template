@@ -1,0 +1,26 @@
+
+UPDATE ANGULAR CLI VERSION
+  node version used -> 19.20.8
+  npm uninstall -g @angular/cli
+  npm install -g @angular/cli@18.2.0
+
+# DEPENDENCIES
+
+## Production dependencies (required for the app to run)
+ npm i primeng@18.0.2                             ## Primeng for components
+ npm i @primeng/themes@18.0.2                     ## Primeng themes
+ npm i primeicons                                 ## Prime Icons
+ npm i date-fns                                   ## Library for date and time
+ npm i jwt-decode                                 ## Library for JWT decoding
+ npm i @ngx-translate/core@16.0.4                 ## Library for internationalization (i18n)
+ npm i @ngx-translate/http-loader@16.0.1          ## Library for translation http loader (i18n)
+
+
+## Development dependencies. Use --save-dev (or -D) for packages not needed in the final production bundle.
+ npm install --save-dev tailwindcss@3.4.17
+ npm install --save-dev postcss@8.4.49
+ npm install --save-dev autoprefixer@10.4.21
+
+
+
+npm i primeng@18.0.6-lts @primeng/themes@18.0.6-lts primeicons date-fns jwt-decode @ngx-translate/core@16.0.4 @ngx-translate/http-loader@16.0.1
