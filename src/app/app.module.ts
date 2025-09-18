@@ -1,24 +1,26 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-
 import {definePreset} from '@primeuix/themes';
-import Aura from '@primeuix/themes/aura';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {provideHttpClient, withFetch, withInterceptors} from '@angular/common/http';
 import {providePrimeNG} from 'primeng/config';
-import {provideTranslateService} from '@ngx-translate/core';
+import {provideTranslateService, TranslatePipe} from '@ngx-translate/core';
 import {provideTranslateHttpLoader} from '@ngx-translate/http-loader';
 import {authInterceptor} from './security/auth-interceptor';
-import { LayoutComponent } from './application/layout/layout.component';
-import { NotFoundComponent } from './application/pages/not-found/not-found.component';
-import { AccessDeniedComponent } from './application/pages/access-denied/access-denied.component';
-import { CallbackComponent } from './security/callback/callback.component';
+
+import {BrowserModule} from '@angular/platform-browser';
+import {AppRoutingModule} from './app-routing.module';
+
+import {AppComponent} from './app.component';
+import {LayoutComponent} from './application/layout/layout.component';
+import {NotFoundComponent} from './application/pages/not-found/not-found.component';
+import {AccessDeniedComponent} from './application/pages/access-denied/access-denied.component';
+import {CallbackComponent} from './security/callback/callback.component';
+import {LoginComponent} from './security/login/login.component';
+import {HomeComponent} from './modules/home/home.component';
+
 import {LocaleProvider} from './services/locale-app.service';
-import { LoginComponent } from './security/login/login.component';
-import { HomeComponent } from './modules/home/home.component';
+import Aura from '@primeuix/themes/aura';
+
 const CustomColors = definePreset(Aura, {
   semantic: {
     primary: {
@@ -49,7 +51,8 @@ const CustomColors = definePreset(Aura, {
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TranslatePipe,
   ],
   providers: [
     LocaleProvider,
