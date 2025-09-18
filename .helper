@@ -1,4 +1,5 @@
 UPDATE ANGULAR CLI VERSION
+  node version used -> 20.19.5
   npm uninstall -g @angular/cli
   npm install -g @angular/cli@19.2.15
 
