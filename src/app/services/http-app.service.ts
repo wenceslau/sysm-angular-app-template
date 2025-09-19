@@ -61,34 +61,39 @@ export class HttpAppService {
 
   }
 
-  async downloadAsync(requestData: Request, filename: string, verb = "POST") {
-
+  async downloadAsync(requestData: Request, filename: string, verb: 'GET' | 'POST' = "POST") {
+    console.log("downloadAsync");
     requestData.setOptions({observe: 'response', responseType: 'blob'});
 
     let response: HttpResponse<Blob>;
     if (verb === "POST") {
       response = await this.postAsync(requestData);
-    }else {
+    } else if (verb === "GET") {
       response = await this.getAsync(requestData);
+    } else {
+      return Promise.reject(new Error(`Unsupported verb for download: ${verb}`));
     }
     const blob = response.body;
     if (!blob || blob.size === 0) {
       throw new Error('Download failed, no data received');
     }
 
-    const contentDisposition = response.headers.get('content-disposition');
+    let finalFilename = filename;
+    const contentDisposition = response.headers.get('Content-Disposition');
     if (contentDisposition) {
       const filenameMatch = contentDisposition.match(/filename="([^"]+)"/);
       if (filenameMatch && filenameMatch.length > 1) {
-        filename = filenameMatch[1];
+        finalFilename = filenameMatch[1];
       }
     }
 
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = filename;
+    link.download = finalFilename;
     document.body.appendChild(link);
     link.click();
+
+    document.body.removeChild(link);
     URL.revokeObjectURL(link.href);
   }
 
