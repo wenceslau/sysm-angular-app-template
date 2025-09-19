@@ -44,6 +44,13 @@ export class LocaleAppService {
     //To make sure all pipes (date and currency) are updated
     this.signalApp.localeChange.set(true);
     this.translate.onLangChange.subscribe(async () => {
+      
+      const {shouldReuseRoute} = this.router.routeReuseStrategy;
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.navigated = false;
+      await this.router.navigateByUrl(this.router.url).catch(noop);
+      this.router.routeReuseStrategy.shouldReuseRoute = shouldReuseRoute;
+      
       console.log("Locale changed");
       const currentRoute = this.router.url;
       // await this.router.navigateByUrl("/", {skipLocationChange: true}).then(() => {
