@@ -3,8 +3,8 @@ import {environment} from '../../environments/environment';
 import {LocaleAppService} from './locale-app.service';
 
 declare const utag: {
-  view: (data: any) => void;
-  link: (data: any) => void;
+  view: (data: object) => void;
+  link: (data: object) => void;
 } | undefined;
 
 export class CustomData {
@@ -44,7 +44,7 @@ export class TealiumAppService {
   }
 
   trackPage(customData: CustomData) {
-    if (utag !== undefined) {
+    if (typeof utag !== 'undefined') {
       this.buildUtagData(customData);
       utag.view(customData);
     } else {
@@ -53,7 +53,7 @@ export class TealiumAppService {
   }
 
   trackEvent(customData: CustomData) {
-    if (utag !== undefined) {
+    if (typeof utag !== 'undefined') {
       this.buildUtagData(customData);
       utag.link(customData);
     } else {
@@ -103,9 +103,9 @@ export class TealiumAppService {
      */
 
     const script = document.createElement('script');
+    script.type = 'text/javascript';
     script.src = url;
     script.async = true;
-    script.type = 'text/javascript';
     document.body.appendChild(script);
 
     console.log("Tealium script injected");
