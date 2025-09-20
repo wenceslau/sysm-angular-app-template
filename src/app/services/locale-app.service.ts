@@ -23,7 +23,7 @@ export class LocaleAppService {
     if (this.initialized) {
       return;
     }
-    this.translate.addLangs(['en', 'pt']);
+    this.translate.addLangs(['en', 'pt', 'fr']);
     this.translate.setDefaultLang(localeId);
 
     this.setLocale(localeId);

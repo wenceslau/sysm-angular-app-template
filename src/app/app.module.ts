@@ -16,6 +16,8 @@ import {registerLocaleData} from "@angular/common";
 
 import localeEn from '@angular/common/locales/en';
 import localePt from '@angular/common/locales/pt';
+import localeFr from '@angular/common/locales/fr';
+
 import Aura from "@primeng/themes/aura";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {LocaleProvider} from "./services/locale-app.service";
@@ -25,6 +27,8 @@ import {authInterceptor} from "./security/auth-interceptor";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {Button} from "primeng/button";
 import {FileUpload} from "primeng/fileupload";
+import { SelectButtonModule } from 'primeng/selectbutton';
+import {FormsModule} from "@angular/forms";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './i18n/', '.json');
@@ -50,6 +54,7 @@ const CustomColors = definePreset(Aura, {
 
 registerLocaleData(localeEn);
 registerLocaleData(localePt);
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
@@ -73,7 +78,9 @@ registerLocaleData(localePt);
     BrowserModule,
     AppRoutingModule,
     Button,
-    FileUpload
+    FileUpload,
+    SelectButtonModule,
+    FormsModule
   ],
   providers: [
     LocaleProvider,

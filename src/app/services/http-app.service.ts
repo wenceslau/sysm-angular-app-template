@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import {catchError, firstValueFrom, Observable, tap, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
 
@@ -9,7 +9,7 @@ import {environment} from '../../environments/environment';
 export class HttpAppService {
 
   private http = inject(HttpClient);
-  private readonly apiUrl = environment.apiUrl;
+  public readonly apiUrl = environment.apiUrl;
 
   get<T>(requestData: Request): Observable<T> {
     return this.executeHttpRequest<T>(requestData, "GET");
@@ -135,6 +135,13 @@ export class HttpAppService {
       }),
       catchError(error => {
         console.error(`HTTP Error: ${verb} ${request.customPath}`, error);
+        if (error instanceof HttpErrorResponse && error.status === 0) {
+          // This is a network error (e.g., ERR_CONNECTION_REFUSED); The server is likely down or unreachable.
+          error = {
+            error: 'Connection Error',
+            message: 'Could not connect to the API. Please ensure the server is running and accessible.'
+          };
+        }
         return throwError(() => error);
       })
     );
