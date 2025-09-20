@@ -1,14 +1,78 @@
-<div class="flex flex-col w-full h-screen">
+<div class="flex flex-col p-6 gap-4">
 
-
-  <div>
-    <p>{{"TRANSLATE.HELLO" | translate }} </p>
+  <div class="flex gap-4 items-center">
+    <p-selectbutton (onChange)="changeLocale($event)" [(ngModel)]="currentValue" [options]="stateOptions" optionLabel="label"
+                    optionValue="value" size="small">
+    </p-selectbutton>
+    <p> {{  label("TRANSLATE.HELLO") }}</p>
+    <p> {{ "TRANSLATE.SAMPLE_TEXT" | translate }}</p>
+    <p> {{ 6890876.09 | number }}</p>
+    <p> <b>{{ currentDate | date: 'full'}}</b></p>
   </div>
 
-  <div>
-    <button></button>
+  <div class="flex gap-4 items-center">
+    <p-button (click)="testHttp('GET')" label="Test get" size="small" styleClass="w-[200px]"></p-button>
   </div>
 
+  <div class="flex gap-4 items-center">
+    <p-button (click)="testHttp('POST')" label="Test post" size="small" styleClass="w-[200px]"></p-button>
+  </div>
 
+  <div class="flex gap-4 items-center">
+    <p-button (click)="testHttp('PUT')" label="Test put" size="small" styleClass="w-[200px]"></p-button>
+  </div>
+
+  <div class="flex gap-4 items-center">
+    <p-button (click)="testHttp('PATCH')" label="Test patch" size="small" styleClass="w-[200px]"></p-button>
+  </div>
+
+  <div class="flex gap-4 items-center">
+    <p-button (click)="testHttp('DELETE')" label="Test delete" size="small" styleClass="w-[200px]"></p-button>
+  </div>
+
+  <div class="flex gap-4 items-center">
+    <p-button (click)="testHttp('D-POST')" label="Test downaload by post" size="small"
+              styleClass="w-[200px]"></p-button>
+  </div>
+
+  <div class="flex gap-4 items-center">
+    <p-button (click)="testHttp('D-GET')" label="Test downaload by get" size="small" styleClass="w-[200px]"></p-button>
+  </div>
+
+  <div class="flex gap-4 items-center">
+    <p-fileupload
+      #fu
+      (onUpload)="onUpload($event)"
+      [url]="urlUpload()"
+      accept="image/*"
+      chooseIcon="pi pi-upload"
+      chooseLabel="Basic Upload"
+      maxFileSize="1000000"
+      mode="basic"
+      name="file"
+      chooseStyleClass="w-[200px] h-[35px]"
+    />
+    <p-button (onClick)="fu.upload()" label="Upload" severity="secondary" size="small" />
+  </div>
+
+  <div class="flex gap-4 items-center">
+    <p-fileupload
+      #customFileUploader
+      (uploadHandler)="onUploadHandler($event)"
+      customUpload="true"
+      accept="image/*"
+      chooseIcon="pi pi-upload"
+      chooseLabel="Custom Upload"
+      maxFileSize="1000000"
+      mode="basic"
+      name="file"
+      chooseStyleClass="w-[200px] h-[35px]"
+    />
+    <p-button (onClick)="customUpload()" label="Upload" severity="secondary" size="small" />
+  </div>
+
+  <div class="flex gap-4 items-center">
+    <h3 *ngIf="response" class="text-xl font-bold">{{ response | json }}</h3>
+  </div>
 
 </div>

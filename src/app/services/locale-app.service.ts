@@ -1,7 +1,7 @@
 import {inject, Injectable, LOCALE_ID, Optional, Provider, SkipSelf} from '@angular/core';
 import {SignalAppService} from './signal-app.service';
 import {TranslateService} from '@ngx-translate/core';
-import {Router} from '@angular/router';
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class LocaleAppService {
     if (this.initialized) {
       return;
     }
-    this.translate.addLangs(['en', 'pt']);
+    this.translate.addLangs(["en", "pt", "fr"]);
     this.translate.setFallbackLang(localeId);
 
     this.setLocale(localeId);
@@ -40,16 +40,15 @@ export class LocaleAppService {
   }
 
   private subscribeToLocaleChange() {
-    //Silent update of the router to apply the new LOCALE_ID
-    //To make sure all pipes (date and currency) are updated
-    this.signalApp.localeChange.set(true);
-    this.translate.onLangChange.subscribe(async () => {
-      const currentRoute = this.router.url;
-      await this.router.navigateByUrl("/", {skipLocationChange: true}).then(() => {
-          this.router.navigate([currentRoute]);
-        }
-      )
-    })
+    // When the language changes, we need to force Angular to re-render the current
+    // component. This is necessary so that all pipes (like date, currency, etc.)
+    // are recreated and pick up the new LOCALE_ID.
+    this.translate.onLangChange.subscribe(async (event) => {
+      this.signalApp.localeChange.set(true);
+      const currentUrl = this.router.url;
+      await this.router.navigateByUrl("/", { skipLocationChange: true });
+      await this.router.navigateByUrl(currentUrl);
+    });
   }
 
 }

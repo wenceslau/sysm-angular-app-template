@@ -1,8 +1,7 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import {catchError, firstValueFrom, Observable, tap, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
-
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ import {environment} from '../../environments/environment';
 export class HttpAppService {
 
   private http = inject(HttpClient);
-  private readonly apiUrl = environment.apiUrl;
+  public readonly apiUrl = environment.apiUrl;
 
   get<T>(requestData: Request): Observable<T> {
     return this.executeHttpRequest<T>(requestData, "GET");
@@ -62,34 +61,39 @@ export class HttpAppService {
 
   }
 
-  async downloadAsync(requestData: Request, filename: string, verb = "POST") {
-
+  async downloadAsync(requestData: Request, filename: string, verb: 'GET' | 'POST' = "POST") {
+    console.log("downloadAsync");
     requestData.setOptions({observe: 'response', responseType: 'blob'});
 
     let response: HttpResponse<Blob>;
     if (verb === "POST") {
       response = await this.postAsync(requestData);
-    }else {
+    } else if (verb === "GET") {
       response = await this.getAsync(requestData);
+    } else {
+      return Promise.reject(new Error(`Unsupported verb for download: ${verb}`));
     }
     const blob = response.body;
     if (!blob || blob.size === 0) {
       throw new Error('Download failed, no data received');
     }
 
-    const contentDisposition = response.headers.get('content-disposition');
+    let finalFilename = filename;
+    const contentDisposition = response.headers.get('Content-Disposition');
     if (contentDisposition) {
       const filenameMatch = contentDisposition.match(/filename="([^"]+)"/);
       if (filenameMatch && filenameMatch.length > 1) {
-        filename = filenameMatch[1];
+        finalFilename = filenameMatch[1];
       }
     }
 
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = filename;
+    link.download = finalFilename;
     document.body.appendChild(link);
     link.click();
+
+    document.body.removeChild(link);
     URL.revokeObjectURL(link.href);
   }
 
@@ -131,6 +135,13 @@ export class HttpAppService {
       }),
       catchError(error => {
         console.error(`HTTP Error: ${verb} ${request.customPath}`, error);
+        if (error instanceof HttpErrorResponse && error.status === 0) {
+          // This is a network error (e.g., ERR_CONNECTION_REFUSED); The server is likely down or unreachable.
+          error = {
+            error: 'Connection Error',
+            message: 'Could not connect to the API. Please ensure the server is running and accessible.'
+          };
+        }
         return throwError(() => error);
       })
     );

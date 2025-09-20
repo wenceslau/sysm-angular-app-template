@@ -1,0 +1,6 @@
+{
+  "TRANSLATE": {
+    "HELLO": "Bonjour",
+    "SAMPLE_TEXT": "Exemple de texte en français pour tester i18n"
+  }
+}
