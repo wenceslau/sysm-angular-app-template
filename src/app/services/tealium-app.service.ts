@@ -1,6 +1,6 @@
-import {inject, Injectable} from '@angular/core';
-import {environment} from '../../environments/environment';
-import {LocaleAppService} from './locale-app.service';
+import {inject, Injectable} from "@angular/core";
+import {environment} from "../../environments/environment";
+import {LocaleAppService} from "./locale-app.service";
 
 declare const utag: {
   view: (data: object) => void;
@@ -23,7 +23,7 @@ export class CustomData {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class TealiumAppService {
 
@@ -44,7 +44,7 @@ export class TealiumAppService {
   }
 
   trackPage(customData: CustomData) {
-    if (typeof utag !== 'undefined') {
+    if (typeof utag !== "undefined") {
       this.buildUtagData(customData);
       utag.view(customData);
     } else {
@@ -53,7 +53,7 @@ export class TealiumAppService {
   }
 
   trackEvent(customData: CustomData) {
-    if (typeof utag !== 'undefined') {
+    if (typeof utag !== "undefined") {
       this.buildUtagData(customData);
       utag.link(customData);
     } else {
@@ -66,7 +66,7 @@ export class TealiumAppService {
      * Build the utag data object from the custom data
      */
 
-    let data = {
+    const data = {
       "locale.id": this.locale.getLocale(),
       "page.url": customData.pageUrl,
     } as any;
@@ -102,8 +102,8 @@ export class TealiumAppService {
      * @param url - Dynamic URL of the Tealium script
      */
 
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
+    const script = document.createElement("script");
+    script.type = "text/javascript";
     script.src = url;
     script.async = true;
     document.body.appendChild(script);

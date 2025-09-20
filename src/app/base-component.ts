@@ -1,11 +1,11 @@
-import {inject} from '@angular/core';
-import {Router} from '@angular/router';
-import {HttpAppService} from './services/http-app.service';
-import {LocaleAppService} from './services/locale-app.service';
-import {SignalAppService} from './services/signal-app.service';
-import {TranslateService} from '@ngx-translate/core';
-import {TealiumAppService} from './services/tealium-app.service';
-import {DomSanitizer} from '@angular/platform-browser';
+import {inject} from "@angular/core";
+import {Router} from "@angular/router";
+import {HttpAppService} from "./services/http-app.service";
+import {LocaleAppService} from "./services/locale-app.service";
+import {SignalAppService} from "./services/signal-app.service";
+import {TranslateService} from "@ngx-translate/core";
+import {TealiumAppService} from "./services/tealium-app.service";
+import {DomSanitizer} from "@angular/platform-browser";
 
 export class BaseComponent {
 

@@ -1,10 +1,10 @@
-import {inject, Injectable, LOCALE_ID, Optional, Provider, SkipSelf} from '@angular/core';
-import {SignalAppService} from './signal-app.service';
-import {TranslateService} from '@ngx-translate/core';
+import {inject, Injectable, LOCALE_ID, Optional, Provider, SkipSelf} from "@angular/core";
+import {SignalAppService} from "./signal-app.service";
+import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class LocaleAppService {
   private initialized = false;
@@ -14,7 +14,7 @@ export class LocaleAppService {
 
   constructor(@Optional() @SkipSelf() parent: LocaleAppService) {
     if (parent) {
-      throw new Error('LocaleAppService is already provided');
+      throw new Error("LocaleAppService is already provided");
     }
   }
 
@@ -32,7 +32,7 @@ export class LocaleAppService {
 
   setLocale(localeId: string) {
     this.translate.use(localeId);
-    localStorage.setItem('locale', localeId);
+    localStorage.setItem("locale", localeId);
   }
 
   getLocale(): string {
@@ -43,7 +43,7 @@ export class LocaleAppService {
     // When the language changes, we need to force Angular to re-render the current
     // component. This is necessary so that all pipes (like date, currency, etc.)
     // are recreated and pick up the new LOCALE_ID.
-    this.translate.onLangChange.subscribe(async (event) => {
+    this.translate.onLangChange.subscribe(async () => {
       this.signalApp.localeChange.set(true);
       const currentUrl = this.router.url;
       await this.router.navigateByUrl("/", { skipLocationChange: true });

@@ -1,10 +1,10 @@
-import {inject, Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
-import {catchError, firstValueFrom, Observable, tap, throwError} from 'rxjs';
-import {environment} from '../../environments/environment';
+import {inject, Injectable} from "@angular/core";
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse} from "@angular/common/http";
+import {catchError, firstValueFrom, Observable, tap, throwError} from "rxjs";
+import {environment} from "../../environments/environment";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class HttpAppService {
 
@@ -53,7 +53,7 @@ export class HttpAppService {
 
   async uploadAsync(formData: FormData, fileBlob: File, path: string) {
 
-    formData.append('file', fileBlob, fileBlob.name);
+    formData.append("file", fileBlob, fileBlob.name);
     const request = new Request(path, formData);
     request.contentType = ContentType.NONE
 
@@ -61,9 +61,9 @@ export class HttpAppService {
 
   }
 
-  async downloadAsync(requestData: Request, filename: string, verb: 'GET' | 'POST' = "POST") {
+  async downloadAsync(requestData: Request, filename: string, verb: "GET" | "POST" = "POST") {
     console.log("downloadAsync");
-    requestData.setOptions({observe: 'response', responseType: 'blob'});
+    requestData.setOptions({observe: "response", responseType: "blob"});
 
     let response: HttpResponse<Blob>;
     if (verb === "POST") {
@@ -75,11 +75,11 @@ export class HttpAppService {
     }
     const blob = response.body;
     if (!blob || blob.size === 0) {
-      throw new Error('Download failed, no data received');
+      throw new Error("Download failed, no data received");
     }
 
     let finalFilename = filename;
-    const contentDisposition = response.headers.get('Content-Disposition');
+    const contentDisposition = response.headers.get("Content-Disposition");
     if (contentDisposition) {
       const filenameMatch = contentDisposition.match(/filename="([^"]+)"/);
       if (filenameMatch && filenameMatch.length > 1) {
@@ -87,7 +87,7 @@ export class HttpAppService {
       }
     }
 
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = finalFilename;
     document.body.appendChild(link);
@@ -98,7 +98,7 @@ export class HttpAppService {
   }
 
   private executeHttpRequest<T>(request: Request, verb: string): Observable<T> {
-    const httpUrlPath = `${this.apiUrl}${request.customPath || ''}`;
+    const httpUrlPath = `${this.apiUrl}${request.customPath || ""}`;
     const options = {
       headers: request.headers(),
       params: request.params(),
@@ -125,7 +125,7 @@ export class HttpAppService {
         break;
       default:
         // Return an observable that immediately errors out for invalid verbs
-        return throwError(() => new Error('HttpVerb not valid'));
+        return throwError(() => new Error("HttpVerb not valid"));
     }
 
     // Use the pipe operator for side effects (logging) and error handling
@@ -138,8 +138,8 @@ export class HttpAppService {
         if (error instanceof HttpErrorResponse && error.status === 0) {
           // This is a network error (e.g., ERR_CONNECTION_REFUSED); The server is likely down or unreachable.
           error = {
-            error: 'Connection Error',
-            message: 'Could not connect to the API. Please ensure the server is running and accessible.'
+            error: "Connection Error",
+            message: "Could not connect to the API. Please ensure the server is running and accessible."
           };
         }
         return throwError(() => error);

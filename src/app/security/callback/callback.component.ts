@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-callback',
+  selector: "app-callback",
   standalone: false,
-  templateUrl: './callback.component.html',
-  styleUrl: './callback.component.scss'
+  templateUrl: "./callback.component.html",
+  styleUrl: "./callback.component.scss"
 })
 export class CallbackComponent {
 

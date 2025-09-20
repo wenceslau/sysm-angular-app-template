@@ -13,15 +13,13 @@ UPDATE ANGULAR CLI VERSION
  npm install @ngx-translate/core                  ## Library for internationalization (i18n)
  npm install @ngx-translate/http-loader           ## Library for translation http loader (i18n)
 
->>>>>> npm install primeng@19.1.4 @primeuix/themes primeicons date-fns jwt-decode @ngx-translate/core @ngx-translate/http-loader
-
 ## Development dependencies. Use --save-dev (or -D) for packages not needed in the final production bundle.
  npm install --save-dev tailwindcss
  npm install --save-dev @tailwindcss/postcss
  npm install --save-dev postcss
  npm install --save-dev tailwindcss-primeui
+ npm install --save-dev npm init @eslint/config@latest
 
->>>>> npm install --save-dev tailwindcss @tailwindcss/postcss postcss tailwindcss-primeui
 
 #CONFIGURATION
  -> Tailwindcss CSS

@@ -1,9 +1,9 @@
-import {inject, Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {jwtDecode} from 'jwt-decode';
+import {inject, Injectable} from "@angular/core";
+import {Router} from "@angular/router";
+import {jwtDecode} from "jwt-decode";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class AuthManagerService {
 
@@ -15,7 +15,7 @@ export class AuthManagerService {
   isAuthenticated(): boolean {
 
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       if (!token) {
         return false;
       }
@@ -33,17 +33,17 @@ export class AuthManagerService {
 
       return true;
     } catch (error) {
-      console.error('Error decoding token:', error);
+      console.error("Error decoding token:", error);
       return false;
     }
   }
 
   revoke() {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
   }
 
   logout() {
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
+    localStorage.removeItem("token");
+    this.router.navigate(["/login"]);
   }
 }

@@ -1,14 +1,14 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {LocaleAppService} from './services/locale-app.service';
-import {NavigationEnd, Router} from '@angular/router';
-import {filter} from 'rxjs';
-import {CustomData, TealiumAppService} from './services/tealium-app.service';
+import {Component, inject, OnInit} from "@angular/core";
+import {LocaleAppService} from "./services/locale-app.service";
+import {NavigationEnd, Router} from "@angular/router";
+import {filter} from "rxjs";
+import {CustomData, TealiumAppService} from "./services/tealium-app.service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
+  selector: "app-root",
+  templateUrl: "./app.component.html",
   standalone: false,
-  styleUrl: './app.component.scss'
+  styleUrl: "./app.component.scss"
 })
 export class AppComponent implements OnInit {
 
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   private router = inject(Router)
 
   constructor() {
-    const locale = localStorage.getItem('locale') || 'en';
+    const locale = localStorage.getItem("locale") || "en";
     this.locale.init(locale)
     this.tealium.init();
   }

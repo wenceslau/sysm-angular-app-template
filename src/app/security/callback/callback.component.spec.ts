@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { CallbackComponent } from './callback.component';
+import { CallbackComponent } from "./callback.component";
 
-describe('CallbackComponent', () => {
+describe("CallbackComponent", () => {
   let component: CallbackComponent;
   let fixture: ComponentFixture<CallbackComponent>;
 
@@ -17,7 +17,7 @@ describe('CallbackComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,20 +1,20 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {CallbackComponent} from './security/callback/callback.component';
-import {LoginComponent} from './security/login/login.component';
-import {LayoutComponent} from './application/layout/layout.component';
-import {AuthGuard} from './security/auth-guard';
-import {HomeComponent} from './modules/home/home.component';
+import {NgModule} from "@angular/core";
+import {RouterModule, Routes} from "@angular/router";
+import {CallbackComponent} from "./security/callback/callback.component";
+import {LoginComponent} from "./security/login/login.component";
+import {LayoutComponent} from "./application/layout/layout.component";
+import {AuthGuard} from "./security/auth-guard";
+import {HomeComponent} from "./modules/home/home.component";
 
 const routes: Routes = [
-  {path: 'login', component: LoginComponent},
-  {path: 'callback', component: CallbackComponent},
+  {path: "login", component: LoginComponent},
+  {path: "callback", component: CallbackComponent},
   {
-    path: '',
+    path: "",
     component: LayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      {path: 'home', component: HomeComponent},
+      {path: "home", component: HomeComponent},
     ]
   }
 ];

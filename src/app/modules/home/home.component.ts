@@ -1,21 +1,21 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, ViewChild} from "@angular/core";
 import {BaseComponent} from "../../base-component";
 import {FileUpload, FileUploadEvent, FileUploadHandlerEvent} from "primeng/fileupload";
 import {Request} from "../../services/http-app.service";
 import {SelectButtonChangeEvent} from "primeng/selectbutton";
 
 @Component({
-  selector: 'app-home',
+  selector: "app-home",
   standalone: false,
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  templateUrl: "./home.component.html",
+  styleUrl: "./home.component.scss"
 })
 export class HomeComponent extends BaseComponent {
 
-  @ViewChild('customFileUploader') customFileUploader!: FileUpload;
-  stateOptions: any[] = [{label: 'EN', value: 'en'}, {label: 'PT', value: 'pt'}, {label: 'FR', value: 'fr'}];
+  @ViewChild("customFileUploader") customFileUploader!: FileUpload;
+  stateOptions: any[] = [{label: "EN", value: "en"}, {label: "PT", value: "pt"}, {label: "FR", value: "fr"}];
   response: any;
-  currentValue = 'en'
+  currentValue = "en"
   currentDate = new Date();
 
   constructor() {
@@ -32,7 +32,7 @@ export class HomeComponent extends BaseComponent {
   }
 
   onUpload(event: FileUploadEvent) {
-    let originalEvent = event.originalEvent as any;
+    const originalEvent = event.originalEvent as any;
     this.response = originalEvent.body;
   }
 
@@ -49,7 +49,7 @@ export class HomeComponent extends BaseComponent {
       }
       const fileBlob = event.files[0];
       const formData = new FormData();
-      formData.append('value', 'Custom value');
+      formData.append("value", "Custom value");
 
       this.response = await this.httpApp.uploadAsync(formData, fileBlob, "/template/custom-upload");
     } catch (error) {
@@ -62,7 +62,7 @@ export class HomeComponent extends BaseComponent {
   }
 
   async testHttp(verb: string) {
-    let request = new Request("/template/hello");
+    const request = new Request("/template/hello");
     let response = "";
     try {
       if (verb === "GET") {
@@ -90,12 +90,12 @@ export class HomeComponent extends BaseComponent {
       } else if (verb === "D-POST") {
         request.customPath = "/template/download";
         request.payload = "sample-download";
-        await this.httpApp.downloadAsync(request, "file.txt", 'POST');
+        await this.httpApp.downloadAsync(request, "file.txt", "POST");
         response = "Downloaded";
 
       } else if (verb === "D-GET") {
         request.customPath = "/template/download";
-        await this.httpApp.downloadAsync(request, "file.txt", 'GET');
+        await this.httpApp.downloadAsync(request, "file.txt", "GET");
         response = "Downloaded";
       }
       this.response = response;
