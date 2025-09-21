@@ -4,7 +4,7 @@ import {HttpAppService} from "./services/http-app.service";
 import {LocaleAppService} from "./services/locale-app.service";
 import {SignalAppService} from "./services/signal-app.service";
 import {TranslateService} from "@ngx-translate/core";
-import {TealiumAppService} from "./services/tealium-app.service";
+import {TrackAppService} from "./services/track-app.service";
 import {DomSanitizer} from "@angular/platform-browser";
 
 export class BaseComponent {
@@ -14,7 +14,7 @@ export class BaseComponent {
   protected readonly localeApp = inject(LocaleAppService);
   protected readonly signalApp = inject(SignalAppService);
   protected readonly translate = inject(TranslateService);
-  protected readonly tealium = inject(TealiumAppService);
+  protected readonly tealium = inject(TrackAppService);
   protected readonly sanitizer = inject(DomSanitizer);
 
   constructor() {
