@@ -2,7 +2,7 @@ import {Component, inject, OnInit} from "@angular/core";
 import {LocaleAppService} from "./services/locale-app.service";
 import {NavigationEnd, Router} from "@angular/router";
 import {filter} from "rxjs";
-import {TrackData, TrackAppService} from "./services/track-app.service";
+import {TrackAppService} from "./services/track-app.service";
 
 @Component({
   selector: "app-root",
