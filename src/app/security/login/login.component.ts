@@ -1,4 +1,6 @@
-import { Component } from "@angular/core";
+import {Component} from "@angular/core";
+import {BaseComponent} from "../../base-component";
+import {Request} from "../../services/http-app.service";
 
 @Component({
   selector: "app-login",

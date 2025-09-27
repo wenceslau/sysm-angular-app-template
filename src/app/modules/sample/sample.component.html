@@ -1,0 +1,116 @@
+<div class="flex flex-col p-6 gap-4">
+
+  <div class="flex gap-4 items-center">
+    <p-selectbutton (onChange)="changeLocale($event)" [(ngModel)]="currentValue" [options]="stateOptions" optionLabel="label"
+                    optionValue="value" size="small">
+    </p-selectbutton>
+    <p> {{  label("TRANSLATE.HELLO") }}</p>
+    <p> {{ "TRANSLATE.SAMPLE_TEXT" | translate }}</p>
+    <p> {{ 6890876.09 | number }}</p>
+    <p> <b>{{ currentDate | date: 'full'}}</b></p>
+  </div>
+
+  <div class="flex gap-4 items-center">
+    <p-button (click)="testHttp('GET')" label="Test get" size="small" styleClass="w-[200px]"></p-button>
+  </div>
+
+  <div class="flex gap-4 items-center">
+    <p-button (click)="testHttp('POST')" label="Test post" size="small" styleClass="w-[200px]"></p-button>
+  </div>
+
+  <div class="flex gap-4 items-center">
+    <p-button (click)="testHttp('PUT')" label="Test put" size="small" styleClass="w-[200px]"></p-button>
+  </div>
+
+  <div class="flex gap-4 items-center">
+    <p-button (click)="testHttp('PATCH')" label="Test patch" size="small" styleClass="w-[200px]"></p-button>
+  </div>
+
+  <div class="flex gap-4 items-center">
+    <p-button (click)="testHttp('DELETE')" label="Test delete" size="small" styleClass="w-[200px]"></p-button>
+  </div>
+
+  <div class="flex gap-4 items-center">
+    <p-button (click)="testHttp('D-POST')" label="Test downaload by post" size="small"
+              styleClass="w-[200px]"></p-button>
+  </div>
+
+  <div class="flex gap-4 items-center">
+    <p-button (click)="testHttp('D-GET')" label="Test downaload by get" size="small" styleClass="w-[200px]"></p-button>
+  </div>
+
+  <div class="flex gap-4 items-center">
+    <p-fileupload
+      #fu
+      (onUpload)="onUpload($event)"
+      [url]="urlUpload()"
+      accept="image/*"
+      chooseIcon="pi pi-upload"
+      chooseLabel="Basic Upload"
+      maxFileSize="1000000"
+      mode="basic"
+      name="file"
+      chooseStyleClass="w-[200px] h-[35px]"
+    />
+    <p-button (onClick)="fu.upload()" label="Upload" severity="secondary" size="small" />
+  </div>
+
+  <div class="flex gap-4 items-center">
+    <p-fileupload
+      #customFileUploader
+      (uploadHandler)="onUploadHandler($event)"
+      customUpload="true"
+      accept="image/*"
+      chooseIcon="pi pi-upload"
+      chooseLabel="Custom Upload"
+      maxFileSize="1000000"
+      mode="basic"
+      name="file"
+      chooseStyleClass="w-[200px] h-[35px]"
+    />
+    <p-button (onClick)="customUpload()" label="Upload" severity="secondary" size="small" />
+  </div>
+
+  <div class="flex gap-4 items-center">
+    <p-button (click)="visible = true" label="Login" size="small" styleClass="w-[200px]"></p-button>
+  </div>
+
+  <div class="flex gap-4 items-center">
+    <p-button (click)="testHttp('L-POST')" label="Logout" size="small" styleClass="w-[200px]"></p-button>
+  </div>
+
+  <div class="flex gap-4 items-center">
+    <h3 *ngIf="response" class="text-xl font-bold">{{ response | json }}</h3>
+  </div>
+
+</div>
+
+<div class="card flex justify-center">
+  <p-dialog [(visible)]="visible" maskStyleClass="backdrop-blur-sm" styleClass="!border-0 !bg-transparent">
+    <ng-template #headless>
+
+      <div class="flex flex-col px-8 py-8 gap-6 rounded-2xl"
+           style="border-radius: 12px; background-image: radial-gradient(circle at left top, var(--p-primary-400), var(--p-primary-700))">
+
+        <div class="inline-flex flex-col gap-2">
+          <label class="text-primary-50 font-semibold" for="username">Username</label>
+          <input #usr class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" id="usr" pInputText/>
+        </div>
+
+        <div class="inline-flex flex-col gap-2">
+          <label class="text-primary-50 font-semibold" for="password">Password</label>
+          <input #pwd class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80 " id="pwd" pInputText type="password"/>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <p-button (click)="closeDialog()" [text]="true" class="w-full" label="Cancel"
+                    styleClass="!p-4 w-full !text-primary-50 !border !border-white/30 hover:!bg-white/10"/>
+          <p-button (click)="login(usr.value, pwd.value)" [text]="true" class="w-full" label="Sign-In"
+                    styleClass="!p-4 w-full !text-primary-50 !border !border-white/30 hover:!bg-white/10"/>
+        </div>
+
+      </div>
+
+    </ng-template>
+  </p-dialog>
+</div>

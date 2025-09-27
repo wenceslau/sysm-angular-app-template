@@ -5,8 +5,10 @@ import {LoginComponent} from "./security/login/login.component";
 import {LayoutComponent} from "./application/layout/layout.component";
 import {AuthGuard} from "./security/auth-guard";
 import {HomeComponent} from "./modules/home/home.component";
+import {SampleComponent} from "./modules/sample/sample.component";
 
 const routes: Routes = [
+  {path: "", redirectTo: "login", pathMatch: "full"},
   {path: "login", component: LoginComponent},
   {path: "callback", component: CallbackComponent},
   {
@@ -16,6 +18,7 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     children: [
       {path: "home", component: HomeComponent},
+      {path: "sample", component: SampleComponent},
     ]
   }
 ];

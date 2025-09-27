@@ -32,6 +32,9 @@ import {SelectButtonModule} from "primeng/selectbutton";
 import localeEn from "@angular/common/locales/en";
 import localePt from "@angular/common/locales/pt";
 import localeFr from "@angular/common/locales/fr";
+import {Dialog} from "primeng/dialog";
+import {InputText} from "primeng/inputtext";
+import { SampleComponent } from './modules/sample/sample.component';
 registerLocaleData(localeEn);
 registerLocaleData(localePt);
 registerLocaleData(localeFr);
@@ -62,7 +65,8 @@ const CustomColors = definePreset(Aura, {
     AccessDeniedComponent,
     CallbackComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    SampleComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +75,9 @@ const CustomColors = definePreset(Aura, {
     Button,
     FileUpload,
     SelectButtonModule,
-    FormsModule
+    FormsModule,
+    Dialog,
+    InputText
   ],
   providers: [
     LocaleProvider,
