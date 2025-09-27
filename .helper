@@ -18,8 +18,7 @@ UPDATE ANGULAR CLI VERSION
  npm install --save-dev @tailwindcss/postcss
  npm install --save-dev postcss
  npm install --save-dev tailwindcss-primeui
- npm npm init @eslint/config@latest
-
+ npm init @eslint/config@latest
 
 #CONFIGURATION
  -> Tailwindcss CSS
