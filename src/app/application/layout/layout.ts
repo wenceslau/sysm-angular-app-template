@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import {Component, signal} from "@angular/core";
+import {BaseComponent} from "../../base-component";
 
 @Component({
   selector: "app-layout",
@@ -6,6 +7,7 @@ import { Component } from "@angular/core";
   templateUrl: "./layout.html",
   styleUrl: "./layout.scss"
 })
-export class Layout {
+export class Layout extends BaseComponent{
 
+  protected readonly signal = signal;
 }

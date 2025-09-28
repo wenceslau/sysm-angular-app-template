@@ -29,3 +29,4 @@ UPDATE ANGULAR CLI VERSION
  -> Application
     - Import BrowserAnimationsModule on AppModule
     - Create CustomColors constant on AppModule with theme colors using Primeng theme as base
+    - Include zone.js package

@@ -1,13 +1,13 @@
-import {NgModule, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection} from "@angular/core";
-import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
+import {NgModule, provideBrowserGlobalErrorListeners} from "@angular/core";
 import {provideHttpClient, withFetch, withInterceptors} from "@angular/common/http";
 import {authInterceptor} from "./security/auth-interceptor";
 import {providePrimeNG} from "primeng/config";
-import {provideTranslateService} from "@ngx-translate/core";
+import {provideTranslateService, TranslatePipe} from "@ngx-translate/core";
 import {provideTranslateHttpLoader} from "@ngx-translate/http-loader";
 import {registerLocaleData} from "@angular/common";
 import {definePreset} from "@primeuix/themes";
 
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BrowserModule} from "@angular/platform-browser";
 import {AppRoutingModule} from "./app-routing-module";
 import {App} from "./app";
@@ -26,6 +26,16 @@ import localeFr from "@angular/common/locales/fr";
 
 import Aura from "@primeuix/themes/aura";
 import {LocaleProvider} from "./services/locale-app";
+import {Button} from "primeng/button";
+import {FileUpload} from "primeng/fileupload";
+import {Dialog} from "primeng/dialog";
+import {SelectButtonModule} from "primeng/selectbutton";
+import {FormsModule} from "@angular/forms";
+import {InputText} from "primeng/inputtext";
+import { ProgressBarModule } from 'primeng/progressbar';
+import { BlockUIModule } from 'primeng/blockui';
+import { UiLoading } from './application/static/ui-loading/ui-loading';
+
 
 registerLocaleData(localeEn);
 registerLocaleData(localePt);
@@ -49,6 +59,7 @@ const CustomColors = definePreset(Aura, {
   }
 });
 
+
 @NgModule({
   declarations: [
     App,
@@ -59,17 +70,26 @@ const CustomColors = definePreset(Aura, {
     Layout,
     NotFound,
     AppError,
-    Unauthorized
+    Unauthorized,
+    UiLoading
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    Button,
+    FileUpload,
+    Dialog,
+    TranslatePipe,
+    SelectButtonModule,
+    FormsModule,
+    InputText,
+    ProgressBarModule,
+    BlockUIModule
   ],
   providers: [
     LocaleProvider,
     provideBrowserGlobalErrorListeners(),
-    provideZonelessChangeDetection(),
-    provideAnimationsAsync(),
     provideHttpClient(withInterceptors([authInterceptor]), withFetch()),
     providePrimeNG({
       theme: {

@@ -1,0 +1,4 @@
+@if (signalApp.loading()) {
+  <p-progressbar mode="indeterminate" [style]="{ height: '6px' }"></p-progressbar>
+  <p-blockui [blocked]="signalApp.loading()" ></p-blockui>
+}

@@ -1,0 +1,6 @@
+{
+  "TRANSLATE": {
+    "HELLO": "Olá",
+    "SAMPLE_TEXTl": "Texto simples em português para testar i18n"
+  }
+}
