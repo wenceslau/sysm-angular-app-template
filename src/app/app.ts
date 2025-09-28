@@ -14,7 +14,7 @@ import {NavigationEnd, Router} from "@angular/router";
 })
 export class App {
 
-  protected readonly title = signal('sysm-angular-app-template');
+  protected readonly title = signal("sysm-angular-app-template");
 
   private tealium = inject(TrackApp)
   private locale = inject(LocaleApp)
