@@ -1,8 +1,5 @@
-import {Component, ViewChild} from "@angular/core";
+import {Component} from "@angular/core";
 import {BaseComponent} from "../../base-component";
-import {FileUpload, FileUploadEvent, FileUploadHandlerEvent} from "primeng/fileupload";
-import {Request} from "../../services/http-app.service";
-import {SelectButtonChangeEvent} from "primeng/selectbutton";
 
 @Component({
   selector: "app-home",

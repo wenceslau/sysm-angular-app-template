@@ -1,14 +1,14 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, ViewChild} from "@angular/core";
 import {BaseComponent} from "../../base-component";
 import {FileUpload, FileUploadEvent, FileUploadHandlerEvent} from "primeng/fileupload";
 import {SelectButtonChangeEvent} from "primeng/selectbutton";
 import {Request} from "../../services/http-app.service";
 
 @Component({
-  selector: 'app-sample',
+  selector: "app-sample",
   standalone: false,
-  templateUrl: './sample.component.html',
-  styleUrl: './sample.component.scss'
+  templateUrl: "./sample.component.html",
+  styleUrl: "./sample.component.scss"
 })
 export class SampleComponent extends BaseComponent {
 
@@ -65,6 +65,7 @@ export class SampleComponent extends BaseComponent {
     const request = new Request("/template/hello");
     let response = "";
     try {
+      this.signalApp.loading.set(true);
       if (verb === "GET") {
         response = await this.httpApp.getAsync<any>(request);
 
@@ -107,6 +108,8 @@ export class SampleComponent extends BaseComponent {
 
     } catch (error) {
       this.response = error;
+    } finally {
+      this.signalApp.loading.set(false);
     }
   }
 

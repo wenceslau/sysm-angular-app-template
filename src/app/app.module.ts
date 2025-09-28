@@ -8,8 +8,6 @@ import {provideTranslateHttpLoader} from "@ngx-translate/http-loader";
 import {authInterceptor} from "./security/auth-interceptor";
 import {registerLocaleData} from "@angular/common";
 
-
-
 import {AppRoutingModule} from "./app-routing.module";
 import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule} from "@angular/forms";
@@ -17,24 +15,29 @@ import {FormsModule} from "@angular/forms";
 import {AppComponent} from "./app.component";
 import {LayoutComponent} from "./application/layout/layout.component";
 import {NotFoundComponent} from "./application/static/not-found/not-found.component";
-import {AccessDeniedComponent} from "./application/static/access-denied/access-denied.component";
 import {CallbackComponent} from "./security/callback/callback.component";
 import {LoginComponent} from "./security/login/login.component";
 import {HomeComponent} from "./modules/home/home.component";
-
-import {LocaleProvider} from "./services/locale-app.service";
-import Aura from "@primeuix/themes/aura";
+import {SampleComponent} from "./modules/sample/sample.component";
+import {AppErrorComponent} from "./application/static/app-error/app-error.component";
+import {UiLoadingComponent} from "./application/static/ui-loading/ui-loading.component";
+import {UnauthorizedComponent} from "./application/static/unauthorized/unauthorized.component";
 
 import {Button} from "primeng/button";
 import {FileUpload} from "primeng/fileupload";
 import {SelectButtonModule} from "primeng/selectbutton";
+import {Dialog} from "primeng/dialog";
+import {InputText} from "primeng/inputtext";
+import {BlockUI} from "primeng/blockui";
+import {ProgressBar} from "primeng/progressbar";
+
+import {LocaleProvider} from "./services/locale-app.service";
+import Aura from "@primeuix/themes/aura";
 
 import localeEn from "@angular/common/locales/en";
 import localePt from "@angular/common/locales/pt";
 import localeFr from "@angular/common/locales/fr";
-import {Dialog} from "primeng/dialog";
-import {InputText} from "primeng/inputtext";
-import { SampleComponent } from './modules/sample/sample.component';
+
 registerLocaleData(localeEn);
 registerLocaleData(localePt);
 registerLocaleData(localeFr);
@@ -62,11 +65,13 @@ const CustomColors = definePreset(Aura, {
     AppComponent,
     LayoutComponent,
     NotFoundComponent,
-    AccessDeniedComponent,
+    UnauthorizedComponent,
     CallbackComponent,
     LoginComponent,
     HomeComponent,
-    SampleComponent
+    SampleComponent,
+    AppErrorComponent,
+    UiLoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +82,9 @@ const CustomColors = definePreset(Aura, {
     SelectButtonModule,
     FormsModule,
     Dialog,
-    InputText
+    InputText,
+    BlockUI,
+    ProgressBar
   ],
   providers: [
     LocaleProvider,
