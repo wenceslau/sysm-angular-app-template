@@ -2,7 +2,7 @@ import {Component, ViewChild} from "@angular/core";
 import {BaseComponent} from "../../base-component";
 import {FileUpload, FileUploadEvent, FileUploadHandlerEvent} from "primeng/fileupload";
 import {SelectButtonChangeEvent} from "primeng/selectbutton";
-import {Request} from "../../services/http-app.service";
+import {RequestApp} from "../../services/http-app.service";
 
 @Component({
   selector: "app-sample",
@@ -48,10 +48,10 @@ export class SampleComponent extends BaseComponent {
         return;
       }
       const fileBlob = event.files[0];
-      const formData = new FormData();
-      formData.append("value", "Custom value");
+      const fileData = new Map<string, any>();
+      fileData.set("fileName", fileBlob.name);
 
-      this.response = await this.httpApp.uploadAsync(formData, fileBlob, "/template/custom-upload");
+      this.response = await this.httpApp.uploadAsync(fileBlob, "/template/custom-upload", fileData);
     } catch (error) {
       if (error instanceof Error) {
         this.response = (error as Error).message;
@@ -62,7 +62,7 @@ export class SampleComponent extends BaseComponent {
   }
 
   async testHttp(verb: string) {
-    const request = new Request("/template/hello");
+    const request = new RequestApp("/template/hello");
     let response = "";
     try {
       this.signalApp.loading.set(true);
@@ -119,7 +119,7 @@ export class SampleComponent extends BaseComponent {
     try {
       console.log("login");
       this.loading(true);
-      const request = new Request("/auth/login", {username, password});
+      const request = new RequestApp("/auth/login", {username, password});
       await this.httpApp.postAsync<void>(request);
       this.visible = false;
       this.response = "Login successful";

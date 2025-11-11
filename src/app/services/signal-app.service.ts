@@ -9,6 +9,7 @@ export class SignalAppService {
 
   public message = signal<any>(null);
   public loading = signal<boolean>(false);
+  public silentLoading = signal<boolean>(false);
 
   constructor() { }
 }
